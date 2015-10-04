@@ -3,9 +3,10 @@
  * License: http://www.opensource.org/licenses/BSD-2-Clause
  */
 #include <stdio.h>
-#include "base/base.h"
 #include <bgfx/bgfx.h>
 #include <bx/uint32_t.h>
+
+#include "base/base.h"
 #include "logo.h"
 using namespace bgfx;
 int _main_(int /*_argc*/, char** /*_argv*/)
