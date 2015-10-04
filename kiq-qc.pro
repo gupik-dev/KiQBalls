@@ -14,8 +14,7 @@ INCLUDEPATH += src \
 LIBS = -lrt -ldl -lX11 -lGL -lpthread
 
 # Input
-HEADERS += src/logo.h \
-           src/base/aviwriter.h \
+HEADERS += src/base/aviwriter.h \
            src/base/base.h \
            src/base/bgfx_utils.h \
            src/base/bounds.h \
@@ -326,10 +325,11 @@ HEADERS += src/logo.h \
            libs/bx/3rdparty/UnitTest++/src/Posix/TimeHelpers.h \
            libs/bx/3rdparty/UnitTest++/src/tests/RecordingReporter.h \
            libs/bx/3rdparty/UnitTest++/src/tests/ScopedCurrentTest.h \
-           libs/bx/include/compat/msvc/pre1600/stdint.h
+           libs/bx/include/compat/msvc/pre1600/stdint.h \
+    src/vs_mesh.sc \
+    src/fs_mesh.sc
 
-SOURCES += src/main.cpp \
-           src/base/bgfx_utils.cpp \
+SOURCES += src/base/bgfx_utils.cpp \
            src/base/bounds.cpp \
            src/base/camera.cpp \
            src/base/cube_atlas.cpp \
@@ -400,4 +400,8 @@ SOURCES += src/main.cpp \
            libs/bx/3rdparty/UnitTest++/src/XmlTestReporter.cpp \
            libs/bx/3rdparty/UnitTest++/src/Posix/SignalTranslator.cpp \
            libs/bx/3rdparty/UnitTest++/src/Posix/TimeHelpers.cpp \
-    src/base/imgui/imgui_imp.cpp
+    src/base/imgui/imgui_imp.cpp \
+    src/mesh.cpp
+
+DISTFILES += \
+    src/varying.def.sc
