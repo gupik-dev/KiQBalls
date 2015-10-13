@@ -401,7 +401,7 @@ SOURCES += src/base/bgfx_utils.cpp \
            libs/bx/3rdparty/UnitTest++/src/Posix/SignalTranslator.cpp \
            libs/bx/3rdparty/UnitTest++/src/Posix/TimeHelpers.cpp \
     src/base/imgui/imgui_imp.cpp \
-    src/mesh.cpp
+    src/main.cpp
 
 DISTFILES += \
     src/varying.def.sc
