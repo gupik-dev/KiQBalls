@@ -5,7 +5,7 @@
 
 #include "base/base.h"
 #include "base/bgfx_utils.h"
-
+#include "base/loader.h"
 int _main_(int /*_argc*/, char** /*_argv*/)
 {
 	uint32_t width = 1280;
@@ -32,10 +32,10 @@ int _main_(int /*_argc*/, char** /*_argv*/)
 	// Create program from shaders.
 	bgfx::ProgramHandle program = loadProgram("vs_mesh", "fs_mesh");
 
-	Mesh* mesh = meshLoad("meshes/bunny.bin");
+    //Mesh* mesh = meshLoad("meshes/bunny.bin");
 
 	int64_t timeOffset = bx::getHPCounter();
-
+    if(Import3DFromFile("/home/knightvincv/dev/bgfx/examples/assets/meshes/cube.obj")){
 	while (!entry::processEvents(width, height, debug, reset) )
 	{
 		// Set view 0 default viewport.
@@ -61,7 +61,7 @@ int _main_(int /*_argc*/, char** /*_argv*/)
 		bgfx::dbgTextPrintf(0, 3, 0x0f, "Frame: % 7.3f[ms]", double(frameTime)*toMs);
 
         float at[3]  = { 0.0f, 0.0f,  -1.f };
-        float eye[3] = { 0.0f, 0.5f, 2.5f };
+        float eye[3] = { 0.0f, 0.5f, 0.5f };
 
         float view[16];
         bx::mtxLookAt(view, eye, at);
@@ -73,20 +73,22 @@ int _main_(int /*_argc*/, char** /*_argv*/)
         // Set view 0 default viewport.
         bgfx::setViewRect(0, 0, 0, width, height);
 
-		float mtx[16];
+        float mtx[16];
         bx::mtxRotateXY(mtx
             , 0.0f
-            , time*0
+            , time*0.1
             );
 
-		meshSubmit(mesh, 0, program, mtx);
+         recursive_render(scene, scene->mRootNode, 0.5, program, mtx);
+        //meshSubmit(mesh, 0, program, mtx);
 
 		// Advance to next frame. Rendering thread will be kicked to
 		// process submitted rendering primitives.
 		bgfx::frame();
 	}
+    }
 
-	meshUnload(mesh);
+    //meshUnload(mesh);
 
 	// Cleanup.
 	bgfx::destroyProgram(program);

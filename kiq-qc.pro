@@ -11,7 +11,7 @@ INCLUDEPATH += src \
            libs/bgfx/3rdparty/khronos \
            libs/bx/include
 
-LIBS = -lrt -ldl -lX11 -lGL -lpthread
+LIBS = -lrt -ldl -lX11 -lGL -lpthread -lassimp
 
 # Input
 HEADERS += src/base/aviwriter.h \
@@ -327,7 +327,8 @@ HEADERS += src/base/aviwriter.h \
            libs/bx/3rdparty/UnitTest++/src/tests/ScopedCurrentTest.h \
            libs/bx/include/compat/msvc/pre1600/stdint.h \
     src/vs_mesh.sc \
-    src/fs_mesh.sc
+    src/fs_mesh.sc \
+    src/base/loader.h
 
 SOURCES += src/base/bgfx_utils.cpp \
            src/base/bounds.cpp \
