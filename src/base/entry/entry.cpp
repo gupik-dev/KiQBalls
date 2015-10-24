@@ -381,7 +381,18 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 		const Event* ev;
 		do
 		{
-			struct SE { const Event* m_ev; SE() : m_ev(poll() ) {} ~SE() { if (NULL != m_ev) { release(m_ev); } } } scopeEvent;
+            struct SE {
+                const Event* m_ev;
+                SE() : m_ev(poll() )
+                {
+
+                }
+                ~SE() {
+                    if (NULL != m_ev) {
+                        release(m_ev);
+                    }
+                }
+            } scopeEvent;
 			ev = scopeEvent.m_ev;
 
 			if (NULL != ev)
@@ -491,163 +502,6 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 	}
 
 	WindowState s_window[ENTRY_CONFIG_MAX_WINDOWS];
-
-	bool processWindowEvents(WindowState& _state, uint32_t& _debug, uint32_t& _reset)
-	{
-		s_debug = _debug;
-		s_reset = _reset;
-
-		WindowHandle handle = { UINT16_MAX };
-
-		bool mouseLock = inputIsMouseLocked();
-
-		const Event* ev;
-		do
-		{
-			struct SE
-			{
-				SE(WindowHandle _handle)
-					: m_ev(poll(_handle) )
-				{
-				}
-
-				~SE()
-				{
-					if (NULL != m_ev)
-					{
-						release(m_ev);
-					}
-				}
-
-				const Event* m_ev;
-
-			} scopeEvent(handle);
-			ev = scopeEvent.m_ev;
-
-			if (NULL != ev)
-			{
-				handle = ev->m_handle;
-				WindowState& win = s_window[handle.idx];
-
-				switch (ev->m_type)
-				{
-				case Event::Axis:
-					{
-						const AxisEvent* axis = static_cast<const AxisEvent*>(ev);
-						inputSetGamepadAxis(axis->m_gamepad, axis->m_axis, axis->m_value);
-					}
-					break;
-
-				case Event::Char:
-					{
-						const CharEvent* chev = static_cast<const CharEvent*>(ev);
-						win.m_handle = chev->m_handle;
-						inputChar(chev->m_len, chev->m_char);
-					}
-					break;
-
-				case Event::Exit:
-					return true;
-
-				case Event::Gamepad:
-					{
-						const GamepadEvent* gev = static_cast<const GamepadEvent*>(ev);
-						DBG("gamepad %d, %d", gev->m_gamepad.idx, gev->m_connected);
-					}
-					break;
-
-				case Event::Mouse:
-					{
-						const MouseEvent* mouse = static_cast<const MouseEvent*>(ev);
-						win.m_handle = mouse->m_handle;
-
-						if (mouse->m_move)
-						{
-							inputSetMousePos(mouse->m_mx, mouse->m_my, mouse->m_mz);
-						}
-						else
-						{
-							inputSetMouseButtonState(mouse->m_button, mouse->m_down);
-						}
-
-						if (!mouseLock)
-						{
-							if (mouse->m_move)
-							{
-								win.m_mouse.m_mx = mouse->m_mx;
-								win.m_mouse.m_my = mouse->m_my;
-								win.m_mouse.m_mz = mouse->m_mz;
-							}
-							else
-							{
-								win.m_mouse.m_buttons[mouse->m_button] = mouse->m_down;
-							}
-						}
-					}
-					break;
-
-				case Event::Key:
-					{
-						const KeyEvent* key = static_cast<const KeyEvent*>(ev);
-						win.m_handle = key->m_handle;
-
-						inputSetKeyState(key->m_key, key->m_modifiers, key->m_down);
-					}
-					break;
-
-				case Event::Size:
-					{
-						const SizeEvent* size = static_cast<const SizeEvent*>(ev);
-						win.m_handle = size->m_handle;
-						win.m_width  = size->m_width;
-						win.m_height = size->m_height;
-						_reset  = win.m_handle.idx == 0
-								? !s_reset
-								: _reset
-								; // force reset
-					}
-					break;
-
-				case Event::Window:
-					{
-						const WindowEvent* window = static_cast<const WindowEvent*>(ev);
-						win.m_handle = window->m_handle;
-						win.m_nwh    = window->m_nwh;
-						ev = NULL;
-					}
-					break;
-
-				default:
-					break;
-				}
-			}
-
-			inputProcess();
-
-		} while (NULL != ev);
-
-		if (isValid(handle) )
-		{
-			const WindowState& win = s_window[handle.idx];
-			_state = win;
-
-			if (handle.idx == 0)
-			{
-				inputSetMouseResolution(win.m_width, win.m_height);
-			}
-		}
-
-		if (_reset != s_reset)
-		{
-			_reset = s_reset;
-			bgfx::reset(s_window[0].m_width, s_window[0].m_height, _reset);
-			inputSetMouseResolution(s_window[0].m_width, s_window[0].m_height);
-		}
-
-		_debug = s_debug;
-
-		return s_exit;
-	}
 
 	bx::FileReaderI* getFileReader()
 	{

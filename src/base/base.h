@@ -10,5 +10,6 @@
 #include <bx/fpumath.h>
 
 #include "entry/entry.h"
+#include "utils.h"
 
 #endif // BASE_H_HEADER_GUARD

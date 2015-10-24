@@ -5,60 +5,35 @@
 
 #include "base/base.h"
 #include "base/bgfx_utils.h"
+#include "game.h"
 
 int _main_(int /*_argc*/, char** /*_argv*/)
 {
-	uint32_t width = 1280;
-	uint32_t height = 720;
-	uint32_t debug = BGFX_DEBUG_TEXT;
-	uint32_t reset = BGFX_RESET_VSYNC;
+    Game game(1280, 720);
+    auto& render_sys = game.renderSystem();
 
-	bgfx::init();
-	bgfx::reset(width, height, reset);
-
-	// Enable debug text.
-	bgfx::setDebug(debug);
-
-	// Set view 0 clear state.
-	bgfx::setViewClear(0
-		, BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH
-		, 0x303030ff
-		, 1.0f
-		, 0
-		);
-
-//	bgfx::UniformHandle u_time = bgfx::createUniform("u_time", bgfx::UniformType::Vec4);
+    game.init();
 
 	// Create program from shaders.
 	bgfx::ProgramHandle program = loadProgram("vs_mesh", "fs_mesh");
 
 	Mesh* mesh = meshLoad("meshes/bunny.bin");
 
-	int64_t timeOffset = bx::getHPCounter();
-
-	while (!entry::processEvents(width, height, debug, reset) )
+    while (!entry::processEvents(render_sys.m_width, render_sys.m_height, render_sys.m_debug_flags, render_sys.m_render_flags))
 	{
-		// Set view 0 default viewport.
-		bgfx::setViewRect(0, 0, 0, width, height);
-
-		// This dummy draw call is here to make sure that view 0 is cleared
-		// if no other draw calls are submitted to view 0.
-		bgfx::touch(0);
-
-		int64_t now = bx::getHPCounter();
-		static int64_t last = now;
-		const int64_t frameTime = now - last;
-		last = now;
-		const double freq = double(bx::getHPFrequency() );
-		const double toMs = 1000.0/freq;
-		float time = (float)( (bx::getHPCounter()-timeOffset)/double(bx::getHPFrequency() ) );
-//		bgfx::setUniform(u_time, &time);
-
 		// Use debug font to print information about this example.
 		bgfx::dbgTextClear();
 		bgfx::dbgTextPrintf(0, 1, 0x4f, "bgfx/examples/04-mesh");
 		bgfx::dbgTextPrintf(0, 2, 0x6f, "Description: Loading meshes.");
 		bgfx::dbgTextPrintf(0, 3, 0x0f, "Frame: % 7.3f[ms]", double(frameTime)*toMs);
+
+        CameraComponent camera;
+        camera.m_lookat = glm::vec3(0.0f, 0.0f, -1.f);
+        camera.m_fov = 80.f;
+        camera.m_near = 1.f;
+        camera.m_far = 100.f;
+
+        render_sys.setView(camera, TransformComponent(0.f, 0.5f, 2.5f));
 
         float at[3]  = { 0.0f, 0.0f,  -1.f };
         float eye[3] = { 0.0f, 0.5f, 2.5f };
@@ -73,13 +48,7 @@ int _main_(int /*_argc*/, char** /*_argv*/)
         // Set view 0 default viewport.
         bgfx::setViewRect(0, 0, 0, width, height);
 
-		float mtx[16];
-        bx::mtxRotateXY(mtx
-            , 0.0f
-            , time*0
-            );
-
-		meshSubmit(mesh, 0, program, mtx);
+        meshSubmit(mesh, 0, program, 0);
 
 		// Advance to next frame. Rendering thread will be kicked to
 		// process submitted rendering primitives.

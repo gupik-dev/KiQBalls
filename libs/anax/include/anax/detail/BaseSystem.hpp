@@ -68,11 +68,11 @@ namespace anax
 
             /// Occurs when an Entity is added to the system
             /// \param entity The Entity that is added to the system
-            virtual void onEntityAdded(Entity& entity) {}
+            virtual void onEntityAdded(Entity&) {}
 
             /// Occurs when an Entity is removed to the system
             /// \param entity The Entity that is removed from the system
-            virtual void onEntityRemoved(Entity& entity) {}
+            virtual void onEntityRemoved(Entity&) {}
 
 
 

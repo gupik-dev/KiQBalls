@@ -5,11 +5,13 @@
 CONFIG += c++11
 TEMPLATE = app
 TARGET = kiq-qc
-INCLUDEPATH += src \
-           libs/bgfx/include \
-           libs/bgfx/3rdparty \
-           libs/bgfx/3rdparty/khronos \
-           libs/bx/include
+INCLUDEPATH +=  src \
+                libs/bgfx/include \
+                libs/bgfx/3rdparty \
+                libs/bgfx/3rdparty/khronos \
+                libs/bx/include \
+                libs/anax/include \
+                libs/glm
 
 LIBS = -lrt -ldl -lX11 -lGL -lpthread
 
@@ -220,93 +222,8 @@ HEADERS += src/base/aviwriter.h \
            libs/bgfx/3rdparty/khronos/glx/glxext.h \
            libs/bgfx/3rdparty/khronos/KHR/khrplatform.h \
            libs/bgfx/3rdparty/khronos/wgl/wglext.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/InfoBar.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/InfoBarCommunicator.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/PlatCocoa.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/QuartzTextLayout.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/QuartzTextStyle.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/QuartzTextStyleAttribute.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/ScintillaCocoa.h \
-           libs/bgfx/3rdparty/scintilla/cocoa/ScintillaView.h \
-           libs/bgfx/3rdparty/scintilla/gtk/Converter.h \
-           libs/bgfx/3rdparty/scintilla/gtk/scintilla-marshal.h \
-           libs/bgfx/3rdparty/scintilla/include/ILexer.h \
-           libs/bgfx/3rdparty/scintilla/include/Platform.h \
-           libs/bgfx/3rdparty/scintilla/include/SciLexer.h \
-           libs/bgfx/3rdparty/scintilla/include/Scintilla.h \
-           libs/bgfx/3rdparty/scintilla/include/ScintillaWidget.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/Accessor.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/CharacterCategory.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/CharacterSet.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/LexAccessor.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/LexerBase.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/LexerModule.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/LexerNoExceptions.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/LexerSimple.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/OptionSet.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/PropSetSimple.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/SparseState.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/StringCopy.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/StyleContext.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/SubStyles.h \
-           libs/bgfx/3rdparty/scintilla/lexlib/WordList.h \
-           libs/bgfx/3rdparty/scintilla/src/AutoComplete.h \
-           libs/bgfx/3rdparty/scintilla/src/CallTip.h \
-           libs/bgfx/3rdparty/scintilla/src/CaseConvert.h \
-           libs/bgfx/3rdparty/scintilla/src/CaseFolder.h \
-           libs/bgfx/3rdparty/scintilla/src/Catalogue.h \
-           libs/bgfx/3rdparty/scintilla/src/CellBuffer.h \
-           libs/bgfx/3rdparty/scintilla/src/CharClassify.h \
-           libs/bgfx/3rdparty/scintilla/src/ContractionState.h \
-           libs/bgfx/3rdparty/scintilla/src/Decoration.h \
-           libs/bgfx/3rdparty/scintilla/src/Document.h \
-           libs/bgfx/3rdparty/scintilla/src/EditModel.h \
-           libs/bgfx/3rdparty/scintilla/src/Editor.h \
-           libs/bgfx/3rdparty/scintilla/src/EditView.h \
-           libs/bgfx/3rdparty/scintilla/src/ExternalLexer.h \
-           libs/bgfx/3rdparty/scintilla/src/FontQuality.h \
-           libs/bgfx/3rdparty/scintilla/src/Indicator.h \
-           libs/bgfx/3rdparty/scintilla/src/KeyMap.h \
-           libs/bgfx/3rdparty/scintilla/src/LineMarker.h \
-           libs/bgfx/3rdparty/scintilla/src/MarginView.h \
-           libs/bgfx/3rdparty/scintilla/src/Partitioning.h \
-           libs/bgfx/3rdparty/scintilla/src/PerLine.h \
-           libs/bgfx/3rdparty/scintilla/src/PositionCache.h \
-           libs/bgfx/3rdparty/scintilla/src/RESearch.h \
-           libs/bgfx/3rdparty/scintilla/src/RunStyles.h \
-           libs/bgfx/3rdparty/scintilla/src/ScintillaBase.h \
-           libs/bgfx/3rdparty/scintilla/src/Selection.h \
-           libs/bgfx/3rdparty/scintilla/src/SplitVector.h \
-           libs/bgfx/3rdparty/scintilla/src/Style.h \
-           libs/bgfx/3rdparty/scintilla/src/UnicodeFromUTF8.h \
-           libs/bgfx/3rdparty/scintilla/src/UniConversion.h \
-           libs/bgfx/3rdparty/scintilla/src/ViewStyle.h \
-           libs/bgfx/3rdparty/scintilla/src/XPM.h \
            libs/bgfx/include/bgfx/c99/bgfx.h \
            libs/bgfx/include/bgfx/c99/bgfxplatform.h \
-           libs/bx/3rdparty/UnitTest++/src/AssertException.h \
-           libs/bx/3rdparty/UnitTest++/src/CheckMacros.h \
-           libs/bx/3rdparty/UnitTest++/src/Checks.h \
-           libs/bx/3rdparty/UnitTest++/src/Config.h \
-           libs/bx/3rdparty/UnitTest++/src/CurrentTest.h \
-           libs/bx/3rdparty/UnitTest++/src/DeferredTestReporter.h \
-           libs/bx/3rdparty/UnitTest++/src/DeferredTestResult.h \
-           libs/bx/3rdparty/UnitTest++/src/ExecuteTest.h \
-           libs/bx/3rdparty/UnitTest++/src/MemoryOutStream.h \
-           libs/bx/3rdparty/UnitTest++/src/ReportAssert.h \
-           libs/bx/3rdparty/UnitTest++/src/Test.h \
-           libs/bx/3rdparty/UnitTest++/src/TestDetails.h \
-           libs/bx/3rdparty/UnitTest++/src/TestList.h \
-           libs/bx/3rdparty/UnitTest++/src/TestMacros.h \
-           libs/bx/3rdparty/UnitTest++/src/TestReporter.h \
-           libs/bx/3rdparty/UnitTest++/src/TestReporterStdout.h \
-           libs/bx/3rdparty/UnitTest++/src/TestResults.h \
-           libs/bx/3rdparty/UnitTest++/src/TestRunner.h \
-           libs/bx/3rdparty/UnitTest++/src/TestSuite.h \
-           libs/bx/3rdparty/UnitTest++/src/TimeConstraint.h \
-           libs/bx/3rdparty/UnitTest++/src/TimeHelpers.h \
-           libs/bx/3rdparty/UnitTest++/src/UnitTest++.h \
-           libs/bx/3rdparty/UnitTest++/src/XmlTestReporter.h \
            libs/bx/include/compat/freebsd/alloca.h \
            libs/bx/include/compat/freebsd/malloc.h \
            libs/bx/include/compat/freebsd/signal.h \
@@ -321,13 +238,172 @@ HEADERS += src/base/aviwriter.h \
            libs/bx/include/compat/msvc/stdbool.h \
            libs/bx/include/compat/nacl/memory.h \
            libs/bx/include/compat/osx/malloc.h \
-           libs/bx/3rdparty/UnitTest++/src/Posix/SignalTranslator.h \
-           libs/bx/3rdparty/UnitTest++/src/Posix/TimeHelpers.h \
-           libs/bx/3rdparty/UnitTest++/src/tests/RecordingReporter.h \
-           libs/bx/3rdparty/UnitTest++/src/tests/ScopedCurrentTest.h \
            libs/bx/include/compat/msvc/pre1600/stdint.h \
     src/vs_mesh.sc \
-    src/fs_mesh.sc
+    src/fs_mesh.sc \
+    libs/anax/include/anax/detail/AnaxAssert.hpp \
+    libs/anax/include/anax/detail/BaseSystem.hpp \
+    libs/anax/include/anax/detail/ClassTypeId.hpp \
+    libs/anax/include/anax/detail/ComponentTypeList.hpp \
+    libs/anax/include/anax/detail/EntityComponentStorage.hpp \
+    libs/anax/include/anax/detail/EntityIdPool.hpp \
+    libs/anax/include/anax/detail/Filter.hpp \
+    libs/anax/include/anax/util/ContainerUtils.hpp \
+    libs/anax/include/anax/anax.hpp \
+    libs/anax/include/anax/Component.hpp \
+    libs/anax/include/anax/Entity.hpp \
+    libs/anax/include/anax/FilterOptions.hpp \
+    libs/anax/include/anax/System.hpp \
+    libs/anax/include/anax/World.hpp \
+    src/game.h \
+    src/systems/lighting_system.h \
+    src/systems/movement_system.h \
+    src/components/camera_component.h \
+    src/systems/rendering_system.h \
+    libs/glm/glm/detail/_features.hpp \
+    libs/glm/glm/detail/_fixes.hpp \
+    libs/glm/glm/detail/_noise.hpp \
+    libs/glm/glm/detail/_swizzle.hpp \
+    libs/glm/glm/detail/_swizzle_func.hpp \
+    libs/glm/glm/detail/_vectorize.hpp \
+    libs/glm/glm/detail/func_common.hpp \
+    libs/glm/glm/detail/func_exponential.hpp \
+    libs/glm/glm/detail/func_geometric.hpp \
+    libs/glm/glm/detail/func_integer.hpp \
+    libs/glm/glm/detail/func_matrix.hpp \
+    libs/glm/glm/detail/func_packing.hpp \
+    libs/glm/glm/detail/func_trigonometric.hpp \
+    libs/glm/glm/detail/func_vector_relational.hpp \
+    libs/glm/glm/detail/intrinsic_common.hpp \
+    libs/glm/glm/detail/intrinsic_exponential.hpp \
+    libs/glm/glm/detail/intrinsic_geometric.hpp \
+    libs/glm/glm/detail/intrinsic_integer.hpp \
+    libs/glm/glm/detail/intrinsic_matrix.hpp \
+    libs/glm/glm/detail/intrinsic_trigonometric.hpp \
+    libs/glm/glm/detail/intrinsic_vector_relational.hpp \
+    libs/glm/glm/detail/precision.hpp \
+    libs/glm/glm/detail/setup.hpp \
+    libs/glm/glm/detail/type_float.hpp \
+    libs/glm/glm/detail/type_gentype.hpp \
+    libs/glm/glm/detail/type_half.hpp \
+    libs/glm/glm/detail/type_int.hpp \
+    libs/glm/glm/detail/type_mat.hpp \
+    libs/glm/glm/detail/type_mat2x2.hpp \
+    libs/glm/glm/detail/type_mat2x3.hpp \
+    libs/glm/glm/detail/type_mat2x4.hpp \
+    libs/glm/glm/detail/type_mat3x2.hpp \
+    libs/glm/glm/detail/type_mat3x3.hpp \
+    libs/glm/glm/detail/type_mat3x4.hpp \
+    libs/glm/glm/detail/type_mat4x2.hpp \
+    libs/glm/glm/detail/type_mat4x3.hpp \
+    libs/glm/glm/detail/type_mat4x4.hpp \
+    libs/glm/glm/detail/type_vec.hpp \
+    libs/glm/glm/detail/type_vec1.hpp \
+    libs/glm/glm/detail/type_vec2.hpp \
+    libs/glm/glm/detail/type_vec3.hpp \
+    libs/glm/glm/detail/type_vec4.hpp \
+    libs/glm/glm/gtc/bitfield.hpp \
+    libs/glm/glm/gtc/color_space.hpp \
+    libs/glm/glm/gtc/constants.hpp \
+    libs/glm/glm/gtc/epsilon.hpp \
+    libs/glm/glm/gtc/integer.hpp \
+    libs/glm/glm/gtc/matrix_access.hpp \
+    libs/glm/glm/gtc/matrix_integer.hpp \
+    libs/glm/glm/gtc/matrix_inverse.hpp \
+    libs/glm/glm/gtc/matrix_transform.hpp \
+    libs/glm/glm/gtc/noise.hpp \
+    libs/glm/glm/gtc/packing.hpp \
+    libs/glm/glm/gtc/quaternion.hpp \
+    libs/glm/glm/gtc/random.hpp \
+    libs/glm/glm/gtc/reciprocal.hpp \
+    libs/glm/glm/gtc/round.hpp \
+    libs/glm/glm/gtc/type_precision.hpp \
+    libs/glm/glm/gtc/type_ptr.hpp \
+    libs/glm/glm/gtc/ulp.hpp \
+    libs/glm/glm/gtc/vec1.hpp \
+    libs/glm/glm/gtx/associated_min_max.hpp \
+    libs/glm/glm/gtx/bit.hpp \
+    libs/glm/glm/gtx/closest_point.hpp \
+    libs/glm/glm/gtx/color_space.hpp \
+    libs/glm/glm/gtx/color_space_YCoCg.hpp \
+    libs/glm/glm/gtx/common.hpp \
+    libs/glm/glm/gtx/compatibility.hpp \
+    libs/glm/glm/gtx/component_wise.hpp \
+    libs/glm/glm/gtx/dual_quaternion.hpp \
+    libs/glm/glm/gtx/euler_angles.hpp \
+    libs/glm/glm/gtx/extend.hpp \
+    libs/glm/glm/gtx/extended_min_max.hpp \
+    libs/glm/glm/gtx/fast_exponential.hpp \
+    libs/glm/glm/gtx/fast_square_root.hpp \
+    libs/glm/glm/gtx/fast_trigonometry.hpp \
+    libs/glm/glm/gtx/gradient_paint.hpp \
+    libs/glm/glm/gtx/handed_coordinate_space.hpp \
+    libs/glm/glm/gtx/hash.hpp \
+    libs/glm/glm/gtx/integer.hpp \
+    libs/glm/glm/gtx/intersect.hpp \
+    libs/glm/glm/gtx/io.hpp \
+    libs/glm/glm/gtx/log_base.hpp \
+    libs/glm/glm/gtx/matrix_cross_product.hpp \
+    libs/glm/glm/gtx/matrix_decompose.hpp \
+    libs/glm/glm/gtx/matrix_interpolation.hpp \
+    libs/glm/glm/gtx/matrix_major_storage.hpp \
+    libs/glm/glm/gtx/matrix_operation.hpp \
+    libs/glm/glm/gtx/matrix_query.hpp \
+    libs/glm/glm/gtx/matrix_transform_2d.hpp \
+    libs/glm/glm/gtx/mixed_product.hpp \
+    libs/glm/glm/gtx/norm.hpp \
+    libs/glm/glm/gtx/normal.hpp \
+    libs/glm/glm/gtx/normalize_dot.hpp \
+    libs/glm/glm/gtx/number_precision.hpp \
+    libs/glm/glm/gtx/optimum_pow.hpp \
+    libs/glm/glm/gtx/orthonormalize.hpp \
+    libs/glm/glm/gtx/perpendicular.hpp \
+    libs/glm/glm/gtx/polar_coordinates.hpp \
+    libs/glm/glm/gtx/projection.hpp \
+    libs/glm/glm/gtx/quaternion.hpp \
+    libs/glm/glm/gtx/range.hpp \
+    libs/glm/glm/gtx/raw_data.hpp \
+    libs/glm/glm/gtx/rotate_normalized_axis.hpp \
+    libs/glm/glm/gtx/rotate_vector.hpp \
+    libs/glm/glm/gtx/scalar_multiplication.hpp \
+    libs/glm/glm/gtx/scalar_relational.hpp \
+    libs/glm/glm/gtx/simd_mat4.hpp \
+    libs/glm/glm/gtx/simd_quat.hpp \
+    libs/glm/glm/gtx/simd_vec4.hpp \
+    libs/glm/glm/gtx/spline.hpp \
+    libs/glm/glm/gtx/std_based_type.hpp \
+    libs/glm/glm/gtx/string_cast.hpp \
+    libs/glm/glm/gtx/transform.hpp \
+    libs/glm/glm/gtx/transform2.hpp \
+    libs/glm/glm/gtx/type_aligned.hpp \
+    libs/glm/glm/gtx/vector_angle.hpp \
+    libs/glm/glm/gtx/vector_query.hpp \
+    libs/glm/glm/gtx/wrap.hpp \
+    libs/glm/glm/common.hpp \
+    libs/glm/glm/exponential.hpp \
+    libs/glm/glm/ext.hpp \
+    libs/glm/glm/fwd.hpp \
+    libs/glm/glm/geometric.hpp \
+    libs/glm/glm/glm.hpp \
+    libs/glm/glm/integer.hpp \
+    libs/glm/glm/mat2x2.hpp \
+    libs/glm/glm/mat2x3.hpp \
+    libs/glm/glm/mat2x4.hpp \
+    libs/glm/glm/mat3x2.hpp \
+    libs/glm/glm/mat3x3.hpp \
+    libs/glm/glm/mat3x4.hpp \
+    libs/glm/glm/mat4x2.hpp \
+    libs/glm/glm/mat4x3.hpp \
+    libs/glm/glm/mat4x4.hpp \
+    libs/glm/glm/matrix.hpp \
+    libs/glm/glm/packing.hpp \
+    libs/glm/glm/trigonometric.hpp \
+    libs/glm/glm/vec2.hpp \
+    libs/glm/glm/vec3.hpp \
+    libs/glm/glm/vec4.hpp \
+    libs/glm/glm/vector_relational.hpp \
+    src/components/transform_component.h \
+    src/base/utils.h
 
 SOURCES += src/base/bgfx_utils.cpp \
            src/base/bounds.cpp \
@@ -382,26 +458,21 @@ SOURCES += src/base/bgfx_utils.cpp \
            libs/bgfx/3rdparty/ocornut-imgui/imgui_draw.cpp \
            libs/bgfx/3rdparty/ocornut-imgui/imgui_node_graph_test.cpp \
            libs/bgfx/3rdparty/stb/stb_image.c \
-           libs/bx/3rdparty/UnitTest++/src/AssertException.cpp \
-           libs/bx/3rdparty/UnitTest++/src/Checks.cpp \
-           libs/bx/3rdparty/UnitTest++/src/CurrentTest.cpp \
-           libs/bx/3rdparty/UnitTest++/src/DeferredTestReporter.cpp \
-           libs/bx/3rdparty/UnitTest++/src/DeferredTestResult.cpp \
-           libs/bx/3rdparty/UnitTest++/src/MemoryOutStream.cpp \
-           libs/bx/3rdparty/UnitTest++/src/ReportAssert.cpp \
-           libs/bx/3rdparty/UnitTest++/src/Test.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TestDetails.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TestList.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TestReporter.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TestReporterStdout.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TestResults.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TestRunner.cpp \
-           libs/bx/3rdparty/UnitTest++/src/TimeConstraint.cpp \
-           libs/bx/3rdparty/UnitTest++/src/XmlTestReporter.cpp \
-           libs/bx/3rdparty/UnitTest++/src/Posix/SignalTranslator.cpp \
-           libs/bx/3rdparty/UnitTest++/src/Posix/TimeHelpers.cpp \
-    src/base/imgui/imgui_imp.cpp \
-    src/main.cpp
+            src/base/imgui/imgui_imp.cpp \
+            src/main.cpp \
+            libs/anax/src/anax/detail/BaseSystem.cpp \
+            libs/anax/src/anax/detail/EntityComponentStorage.cpp \
+            libs/anax/src/anax/detail/EntityIdPool.cpp \
+            libs/anax/src/anax/detail/Filter.cpp \
+            libs/anax/src/anax/Entity.cpp \
+            libs/anax/src/anax/World.cpp \
+            src/game.cpp \
+            src/systems/lighting_system.cpp \
+            src/systems/movement_system.cpp \
+    src/systems/rendering_system.cpp \
+    libs/glm/glm/detail/glm.cpp \
+    src/components/transform_component.cpp \
+    src/utils.cpp
 
 DISTFILES += \
     src/varying.def.sc
