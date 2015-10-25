@@ -332,7 +332,6 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 
 	int main(int _argc, char** _argv)
 	{
-		printf("dcm");
 		//DBG(BX_COMPILER_NAME " / " BX_CPU_NAME " / " BX_ARCH_NAME " / " BX_PLATFORM_NAME);
 
 #if BX_CONFIG_CRT_FILE_READER_WRITER
