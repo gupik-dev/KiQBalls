@@ -60,15 +60,15 @@ namespace anax
             ComponentTypeList m_excludes;
         };
 
-        template <class... Args>
-        static ComponentTypeList types(TypeList<Args...> typeList) { return ComponentTypeList(); }
+//        template <class... Args>
+//        static ComponentTypeList types(TypeList<Args...> typeList) { return ComponentTypeList(); }
 
-        template <class T, class... Args>
-        static ComponentTypeList types(detail::TypeList<T, Args...> typeList)
-        {
-            static_assert(std::is_base_of<Component, T>::value, "Invalid component");
-            return ComponentTypeList().set(ComponentTypeId<T>()) | types(detail::TypeList<Args...>());
-        }
+//        template <class T, class... Args>
+//        static ComponentTypeList types(detail::TypeList<T, Args...> typeList)
+//        {
+//            static_assert(std::is_base_of<Component, T>::value, "Invalid component");
+//            return ComponentTypeList().set(ComponentTypeId<T>()) | types(detail::TypeList<Args...>());
+//        }
 
         template <class RequireList, class ExcludeList> 
         Filter MakeFilter()

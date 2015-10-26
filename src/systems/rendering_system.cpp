@@ -3,10 +3,9 @@
 #include "rendering_system.h"
 #include "base/utils.h"
 
-RenderingSystem::RenderingSystem(int width, int height)
+RenderingSystem::RenderingSystem(Window& window):
+    m_window(window)
 {
-    m_width = width;
-    m_height  = height;
     m_debug_flags = BGFX_DEBUG_TEXT;
     m_render_flags = BGFX_RESET_NONE;
 }
@@ -14,9 +13,6 @@ RenderingSystem::RenderingSystem(int width, int height)
 void RenderingSystem::init()
 {
     bgfx::init();
-    bgfx::reset(m_width, m_height, m_render_flags);
-
-    // Enable debug text.
     bgfx::setDebug(m_debug_flags);
 
     // Set view 0 clear state.
@@ -27,13 +23,18 @@ void RenderingSystem::init()
         , 0
         );
 
-    bgfx::setViewRect(0, 0, 0, m_width, m_height);
+    bgfx::reset(m_window.m_width, m_window.m_height, m_render_flags);
+}
+
+void RenderingSystem::update()
+{
+    bgfx::setViewRect(0, 0, 0, m_window.m_width, m_window.m_width);
 }
 
 void RenderingSystem::setView(const CameraComponent& camera, TransformComponent t)
 {
     float at[3];
-    toArray(at, t.transform(camera.m_lookat));
+    toArray(at, camera.m_lookat);
 
     float eye[3];
     toArray(eye, t.pos());
@@ -41,7 +42,7 @@ void RenderingSystem::setView(const CameraComponent& camera, TransformComponent 
     float view[16];
     bx::mtxLookAt(view, eye, at);
 
-    auto aspect_ratio = camera.m_aspect ? camera.m_aspect : float(m_width)/float(m_height);
+    auto aspect_ratio = camera.m_aspect ? camera.m_aspect : m_window.aspect();
 
     float proj[16];
     bx::mtxProj(proj, camera.m_fov, aspect_ratio, camera.m_near, camera.m_far);

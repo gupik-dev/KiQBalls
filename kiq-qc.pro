@@ -255,6 +255,7 @@ HEADERS += src/base/aviwriter.h \
     libs/anax/include/anax/FilterOptions.hpp \
     libs/anax/include/anax/System.hpp \
     libs/anax/include/anax/World.hpp \
+    libs/anax/include/anax/Config.hpp \
     src/game.h \
     src/systems/lighting_system.h \
     src/systems/movement_system.h \
@@ -403,7 +404,8 @@ HEADERS += src/base/aviwriter.h \
     libs/glm/glm/vec4.hpp \
     libs/glm/glm/vector_relational.hpp \
     src/components/transform_component.h \
-    src/base/utils.h
+    src/base/utils.h \
+    src/window.h
 
 SOURCES += src/base/bgfx_utils.cpp \
            src/base/bounds.cpp \
@@ -472,7 +474,7 @@ SOURCES += src/base/bgfx_utils.cpp \
     src/systems/rendering_system.cpp \
     libs/glm/glm/detail/glm.cpp \
     src/components/transform_component.cpp \
-    src/utils.cpp
+    src/window.cpp
 
 DISTFILES += \
     src/varying.def.sc

@@ -65,9 +65,9 @@ struct AnimationComponent : anax::Component
     {
     }
 
-#ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT
-    virtual ~AnimationComponent() { }
-#endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT
+//#ifdef ANAX_VIRTUAL_DTORS_IN_COMPONENT_1
+//    virtual ~AnimationComponent() { }
+//#endif // ANAX_VIRTUAL_DTORS_IN_COMPONENT_1
 
     /// Plays an animation
     void play(const std::string& state)

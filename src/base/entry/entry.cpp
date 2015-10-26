@@ -21,7 +21,7 @@ extern "C" int _main_(int _argc, char** _argv);
 
 namespace entry
 {
-	static uint32_t s_debug = BGFX_DEBUG_NONE;
+    static uint32_t s_debug = BGFX_DEBUG_NONE;
 	static uint32_t s_reset = BGFX_RESET_NONE;
 	static bool s_exit = false;
 	static bx::FileReaderI* s_fileReader = NULL;
@@ -369,7 +369,7 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 		return result;
 	}
 
-	bool processEvents(uint32_t& _width, uint32_t& _height, uint32_t& _debug, uint32_t& _reset, MouseState* _mouse)
+    bool processEvents(uint32_t* _width, uint32_t* _height, uint32_t _debug, uint32_t _reset, MouseState* _mouse)
 	{
 		s_debug = _debug;
 		s_reset = _reset;
@@ -467,8 +467,8 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 					{
 						const SizeEvent* size = static_cast<const SizeEvent*>(ev);
 						handle  = size->m_handle;
-						_width  = size->m_width;
-						_height = size->m_height;
+                        *_width  = size->m_width;
+                        *_height = size->m_height;
 						_reset  = !s_reset; // force reset
 					}
 					break;
@@ -492,8 +492,8 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 		&&  _reset != s_reset)
 		{
 			_reset = s_reset;
-			bgfx::reset(_width, _height, _reset);
-			inputSetMouseResolution(_width, _height);
+            bgfx::reset(*_width, *_height, _reset);
+            inputSetMouseResolution(*_width, *_height);
 		}
 
 		_debug = s_debug;
@@ -535,5 +535,5 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 
 extern "C" bool entry_process_events(uint32_t* _width, uint32_t* _height, uint32_t* _debug, uint32_t* _reset)
 {
-	return entry::processEvents(*_width, *_height, *_debug, *_reset, NULL);
+    return entry::processEvents(_width, _height, *_debug, *_reset, NULL);
 }

@@ -1,7 +1,8 @@
 #include "game.h"
 
-Game::Game(int view_width, int view_height)
-    : m_render_system(view_width, view_height)
+Game::Game(Window &window)
+    : m_window(window),
+      m_render_system(window)
 {
 }
 

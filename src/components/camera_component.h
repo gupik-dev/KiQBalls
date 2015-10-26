@@ -11,6 +11,7 @@ struct CameraComponent: anax::Component
     float m_fov;
     glm::vec3 m_lookat;
 
+//    virtual ~CameraComponent() {}
     CameraComponent():
         m_aspect(0.f),
         m_near(0.f),
