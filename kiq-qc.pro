@@ -15,6 +15,8 @@ INCLUDEPATH +=  src \
 
 LIBS = -lrt -ldl -lX11 -lGL -lpthread
 
+QMAKE_LFLAGS = -fsanitize=address -fno-omit-frame-pointer
+
 # Input
 HEADERS += src/base/aviwriter.h \
            src/base/base.h \
