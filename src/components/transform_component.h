@@ -5,8 +5,9 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <anax/Component.hpp>
 
-struct TransformComponent
+struct TransformComponent: anax::Component
 {
     glm::mat4 m_mtx;
 

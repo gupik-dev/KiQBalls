@@ -4,19 +4,26 @@
 #include <bgfx/bgfx.h>
 #include <components/camera_component.h>
 #include <components/transform_component.h>
+#include <anax/Entity.hpp>
+
 #include "window.h"
 
-struct RenderingSystem
+struct ViewSystem
 {
     Window& m_window;
     uint32_t m_render_flags, m_debug_flags;
 
-    RenderingSystem(Window& window);
-    ~RenderingSystem();
+    ViewSystem(Window& window);
+    ~ViewSystem();
 
     void init();
     void update();
-    void setView(const CameraComponent& camera, TransformComponent t);
+    void setCamera(anax::Entity& camera);
+
+private:
+    void updateCamera();
+
+    anax::Entity m_camera;
 };
 
 #endif // BGFXSYSTEM_H

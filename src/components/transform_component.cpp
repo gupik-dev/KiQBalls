@@ -4,7 +4,7 @@ const TransformComponent TransformComponent::None = TransformComponent();
 
 glm::vec3 TransformComponent::transform(glm::vec3 v)
 {
-    return glm::vec3(m_mtx * glm::vec4(v, 0));
+    return glm::vec3(m_mtx * glm::vec4(v, 1));
 }
 
 glm::vec3 TransformComponent::pos()

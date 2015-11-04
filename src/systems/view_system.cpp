@@ -1,16 +1,18 @@
 #include <bx/fpumath.h>
 
-#include "rendering_system.h"
 #include "base/utils.h"
+#include "view_system.h"
+#include "components/camera_component.h"
+#include "components/transform_component.h"
 
-RenderingSystem::RenderingSystem(Window& window):
+ViewSystem::ViewSystem(Window& window):
     m_window(window)
 {
     m_debug_flags = BGFX_DEBUG_TEXT;
     m_render_flags = BGFX_RESET_NONE;
 }
 
-void RenderingSystem::init()
+void ViewSystem::init()
 {
     bgfx::init();
     bgfx::setDebug(m_debug_flags);
@@ -26,15 +28,12 @@ void RenderingSystem::init()
     bgfx::reset(m_window.m_width, m_window.m_height, m_render_flags);
 }
 
-void RenderingSystem::update()
-{
-    bgfx::setViewRect(0, 0, 0, m_window.m_width, m_window.m_width);
-}
+void ViewSystem::updateCamera() {
+    auto& camera = m_camera.getComponent<CameraComponent>();
+    auto& t = m_camera.getComponent<TransformComponent>();
 
-void RenderingSystem::setView(const CameraComponent& camera, TransformComponent t)
-{
     float at[3];
-    toArray(at, camera.m_lookat);
+    toArray(at, t.transform(camera.m_lookat));
 
     float eye[3];
     toArray(eye, t.pos());
@@ -42,14 +41,25 @@ void RenderingSystem::setView(const CameraComponent& camera, TransformComponent 
     float view[16];
     bx::mtxLookAt(view, eye, at);
 
-    auto aspect_ratio = camera.m_aspect ? camera.m_aspect : m_window.aspect();
+    auto aspect_ratio = camera.m_aspect ? camera.m_aspect : 1;
 
     float proj[16];
     bx::mtxProj(proj, camera.m_fov, aspect_ratio, camera.m_near, camera.m_far);
     bgfx::setViewTransform(0, view, proj);
 }
 
-RenderingSystem::~RenderingSystem() {
+void ViewSystem::update()
+{
+    bgfx::setViewRect(0, 0, 0, m_window.m_width, m_window.m_width);
+    updateCamera();
+}
+
+void ViewSystem::setCamera(anax::Entity& camera)
+{
+    m_camera = camera;
+}
+
+ViewSystem::~ViewSystem() {
     bgfx::shutdown();
 }
 

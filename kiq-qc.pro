@@ -262,7 +262,6 @@ HEADERS += src/base/aviwriter.h \
     src/systems/lighting_system.h \
     src/systems/movement_system.h \
     src/components/camera_component.h \
-    src/systems/rendering_system.h \
     libs/glm/glm/detail/_features.hpp \
     libs/glm/glm/detail/_fixes.hpp \
     libs/glm/glm/detail/_noise.hpp \
@@ -407,7 +406,10 @@ HEADERS += src/base/aviwriter.h \
     libs/glm/glm/vector_relational.hpp \
     src/components/transform_component.h \
     src/base/utils.h \
-    src/window.h
+    src/window.h \
+    src/systems/input_system.h \
+    src/frame_timer.h \
+    src/systems/view_system.h
 
 SOURCES += src/base/bgfx_utils.cpp \
            src/base/bounds.cpp \
@@ -473,10 +475,12 @@ SOURCES += src/base/bgfx_utils.cpp \
             src/game.cpp \
             src/systems/lighting_system.cpp \
             src/systems/movement_system.cpp \
-    src/systems/rendering_system.cpp \
     libs/glm/glm/detail/glm.cpp \
     src/components/transform_component.cpp \
-    src/window.cpp
+    src/window.cpp \
+    src/systems/input_system.cpp \
+    src/frame_timer.cpp \
+    src/systems/view_system.cpp
 
 DISTFILES += \
     src/varying.def.sc
