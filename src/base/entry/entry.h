@@ -232,7 +232,7 @@ namespace entry
 		int32_t m_axis[entry::GamepadAxis::Count];
 	};
 
-    bool processEvents(uint32_t* _width, uint32_t* _height, uint32_t _debug, uint32_t _reset, MouseState* _mouse = NULL);
+    bool processEvents(uint32_t* _width, uint32_t* _height, MouseState* _mouse = NULL);
 
 	bx::FileReaderI* getFileReader();
 	bx::FileWriterI* getFileWriter();
@@ -262,7 +262,7 @@ namespace entry
 		void*        m_nwh;
 	};
 
-	bool processWindowEvents(WindowState& _state, uint32_t& _debug, uint32_t& _reset);
+//	bool processWindowEvents(WindowState& _state, uint32_t& _debug, uint32_t& _reset);
 
 	struct BX_NO_VTABLE AppI
 	{

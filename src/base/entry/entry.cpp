@@ -369,10 +369,8 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 		return result;
 	}
 
-    bool processEvents(uint32_t* _width, uint32_t* _height, uint32_t _debug, uint32_t _reset, MouseState* _mouse)
+    bool processEvents(uint32_t* _width, uint32_t* _height, MouseState* _mouse)
 	{
-		s_debug = _debug;
-		s_reset = _reset;
 
 		WindowHandle handle = { UINT16_MAX };
 
@@ -469,7 +467,6 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 						handle  = size->m_handle;
                         *_width  = size->m_width;
                         *_height = size->m_height;
-						_reset  = !s_reset; // force reset
 					}
 					break;
 
@@ -487,16 +484,6 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 			inputProcess();
 
 		} while (NULL != ev);
-
-		if (handle.idx == 0
-		&&  _reset != s_reset)
-		{
-			_reset = s_reset;
-            bgfx::reset(*_width, *_height, _reset);
-            inputSetMouseResolution(*_width, *_height);
-		}
-
-		_debug = s_debug;
 
 		return s_exit;
 	}
@@ -533,7 +520,3 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 
 } // namespace entry
 
-extern "C" bool entry_process_events(uint32_t* _width, uint32_t* _height, uint32_t* _debug, uint32_t* _reset)
-{
-    return entry::processEvents(_width, _height, *_debug, *_reset, NULL);
-}

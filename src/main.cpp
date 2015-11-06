@@ -13,7 +13,6 @@ int _main_(int /*_argc*/, char** /*_argv*/)
     Window window(1280, 720);
     Game game(window);
     FrameTimer f_timer(&game, 0.01);
-    auto& view = game.viewSystem();
 
     game.init();
 
@@ -21,7 +20,7 @@ int _main_(int /*_argc*/, char** /*_argv*/)
 
     Mesh* mesh = meshLoad("meshes/bunny.bin");
 
-    while (!entry::processEvents(&window.m_width, &window.m_height, view.m_debug_flags, view.m_render_flags))
+    while (!game.inputSystem().processEvents())
     {
         bgfx::dbgTextClear();
 

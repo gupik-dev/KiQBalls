@@ -8,7 +8,7 @@
 
 #include "window.h"
 
-struct ViewSystem
+struct ViewSystem: public ResizeEventListener
 {
     Window& m_window;
     uint32_t m_render_flags, m_debug_flags;
@@ -19,6 +19,8 @@ struct ViewSystem
     void init();
     void update();
     void setCamera(anax::Entity& camera);
+
+    virtual void onWindowResize(Window* window);
 
 private:
     void updateCamera();

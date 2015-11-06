@@ -2,9 +2,12 @@
 #define GAME_H
 
 #include <anax/anax.hpp>
-#include "systems/view_system.h"
+
 #include "window.h"
 #include "frame_timer.h"
+
+#include "systems/view_system.h"
+#include "systems/input_system.h"
 
 class Game: public FramedObj
 {
@@ -18,13 +21,13 @@ class Game: public FramedObj
     anax::World m_world;
 
     /// The movement system
-//    MovementSystem m_movementSystem;
+//    MovementSystem m_movement_system;
 
 //    /// The animation system
-//    AnimationSystem m_animationSystem;
+//    AnimationSystem m_animation_system;
 
-    /// The player input system
-//    PlayerInputSystem m_playerInputSystem;
+    /// Input system
+    InputSystem m_input_system;
 
     /// The current player
     anax::Entity m_player;
@@ -54,8 +57,7 @@ public:
     /// Loads game resources
     void loadResources();
 
-    ViewSystem& viewSystem() { return m_view_system; }
-    const Window& window() const { return m_window; }
+    InputSystem& inputSystem() { return m_input_system; }
 };
 
 

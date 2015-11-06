@@ -2,7 +2,8 @@
 
 Game::Game(Window& window)
     : m_window(window),
-      m_view_system(window)
+      m_view_system(window),
+      m_input_system(window)
 {
     m_camera = m_world.createEntity();
 
@@ -14,7 +15,7 @@ Game::Game(Window& window)
     camera.m_lookat.y = -1.f;
     camera.m_lookat.z = 2.5f;
 
-    m_camera.addComponent<TransformComponent>(glm::vec3(-0.5f, 1.f, -3.5f));
+    m_camera.addComponent<TransformComponent>(glm::vec3(-0.5f, 2.f, -2.5f));
     m_view_system.setCamera(m_camera);
 }
 

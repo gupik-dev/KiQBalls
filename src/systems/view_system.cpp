@@ -25,7 +25,16 @@ void ViewSystem::init()
         , 0
         );
 
-    bgfx::reset(m_window.m_width, m_window.m_height, m_render_flags);
+    bgfx::reset(m_window.width(), m_window.height(), m_render_flags);
+}
+
+void ViewSystem::onWindowResize(Window* window)
+{
+    bgfx::reset(window->width(), window->height(), m_render_flags);
+    if (&m_window != window)
+    {
+        m_window = *window;
+    }
 }
 
 void ViewSystem::updateCamera() {
@@ -41,7 +50,7 @@ void ViewSystem::updateCamera() {
     float view[16];
     bx::mtxLookAt(view, eye, at);
 
-    auto aspect_ratio = camera.m_aspect ? camera.m_aspect : 1;
+    auto aspect_ratio = camera.m_aspect ? camera.m_aspect : m_window.aspect();
 
     float proj[16];
     bx::mtxProj(proj, camera.m_fov, aspect_ratio, camera.m_near, camera.m_far);
@@ -50,7 +59,7 @@ void ViewSystem::updateCamera() {
 
 void ViewSystem::update()
 {
-    bgfx::setViewRect(0, 0, 0, m_window.m_width, m_window.m_width);
+    bgfx::setViewRect(0, 0, 0, m_window.width(), m_window.height());
     updateCamera();
 }
 
